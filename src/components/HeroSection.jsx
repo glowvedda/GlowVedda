@@ -36,9 +36,9 @@ const HeroSection = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 font-christmas"
+                            className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
                         >
-                            Glow This <span className="text-primary">Christmas</span> with Natural Radiance
+                            Glow with <span className="text-primary">Natural Radiance</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}

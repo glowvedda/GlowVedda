@@ -5,7 +5,6 @@ import ProductShowcase from '@/components/ProductShowcase';
 import BenefitsSection from '@/components/BenefitsSection';
 import CallToAction from '@/components/CallToAction';
 import { Toaster } from '@/components/ui/toaster';
-import SnowEffect from '@/components/SnowEffect';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -33,7 +32,6 @@ function App() {
                 <meta property="twitter:image" content="https://glowvedda.com/android-chrome-512x512.png" />
             </Helmet>
             <div className="min-h-screen bg-white">
-                <SnowEffect />
                 <Header />
                 <HeroSection />
                 <ProductShowcase />

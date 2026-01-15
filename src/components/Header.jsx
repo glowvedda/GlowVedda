@@ -3,14 +3,13 @@ import { motion } from 'framer-motion';
 
 const Header = () => {
     return (
-        <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md candy-cane-border-b shadow-sm">
+        <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="santa-hat-overlay"
                 >
-                    <h1 className="text-2xl font-bold font-christmas text-primary tracking-wide">
+                    <h1 className="text-2xl font-bold text-primary tracking-wide">
                         GlowVedda
                     </h1>
                 </motion.div>
