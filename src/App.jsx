@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import HeroSection from '@/components/HeroSection';
 import ProductShowcase from '@/components/ProductShowcase';
@@ -7,8 +7,16 @@ import CallToAction from '@/components/CallToAction';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { products } from '@/data/products';
 
 function App() {
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.benefits.some(benefit => benefit.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+
     return (
         <>
             <Helmet>
@@ -32,11 +40,20 @@ function App() {
                 <meta property="twitter:image" content="https://glowvedda.com/android-chrome-512x512.png" />
             </Helmet>
             <div className="min-h-screen bg-white">
-                <Header />
-                <HeroSection />
-                <ProductShowcase />
-                <BenefitsSection />
-                <CallToAction />
+                <Header onSearch={setSearchQuery} />
+                {searchQuery ? (
+                    <div className="pt-24 min-h-[60vh]">
+                        <h2 className="text-center text-3xl font-oswald mb-8">Search Results for "{searchQuery}"</h2>
+                        <ProductShowcase products={filteredProducts} />
+                    </div>
+                ) : (
+                    <>
+                        <HeroSection />
+                        <ProductShowcase products={products} />
+                        <BenefitsSection />
+                        <CallToAction />
+                    </>
+                )}
                 <Footer />
                 <Toaster />
             </div>

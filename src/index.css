@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
     :root {
+
         --background: 0 0% 100%;
         --foreground: 142 72% 15%;
         /* Dark Green Text */

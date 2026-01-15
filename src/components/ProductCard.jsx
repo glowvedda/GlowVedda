@@ -31,62 +31,47 @@ const ProductCard = ({ product, index, imageElement }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            whileHover={{ y: -10 }}
-            className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+            whileHover={{ y: -5 }}
+            className="bg-white rounded-none border border-gray-100 hover:border-olive-green/30 transition-all duration-300 overflow-hidden group font-poppins"
         >
-            <div className="relative overflow-hidden">
-                <div className="absolute top-4 right-4 z-10 bg-amber-500 text-white px-3 py-1 rounded-full font-bold text-sm shadow-lg">
+            <div className="relative overflow-hidden bg-off-white aspect-[4/5]">
+                <div className="absolute top-0 left-0 z-10 bg-olive-green text-white px-3 py-1 text-xs uppercase tracking-widest font-medium">
                     {discountPercentage}% OFF
                 </div>
                 <button
                     onClick={handleWishlist}
-                    className="absolute top-4 left-4 z-10 bg-white p-2 rounded-full shadow-lg hover:bg-amber-500 hover:text-white transition-all duration-300"
+                    className="absolute top-2 right-2 z-10 bg-white/80 p-2 rounded-full hover:bg-olive-green hover:text-white transition-all duration-300 backdrop-blur-sm"
                 >
-                    <Heart className="w-5 h-5" />
+                    <Heart className="w-4 h-4" />
                 </button>
-                <div className="aspect-square overflow-hidden bg-gradient-to-br from-amber-50 to-blue-50">
+                <div className="w-full h-full flex items-center justify-center">
                     {imageElement ? (
                         imageElement
                     ) : (
                         <img
                             src={product.image}
                             alt={product.name}
-                            className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                            className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
                         />
                     )}
                 </div>
             </div>
 
-            <div className="p-6">
-                <h3 className="text-xl font-bold text-blue-950 mb-3 line-clamp-2 min-h-[3.5rem]">
+            <div className="p-6 text-center">
+                <h3 className="text-lg font-oswald font-medium text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem] leading-tight">
                     {product.name}
                 </h3>
 
-                <div className="mb-4">
-                    <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-3xl font-bold text-amber-500">₹{product.discountedPrice}</span>
-                        <span className="text-lg text-gray-400 line-through">₹{product.mrp}</span>
-                    </div>
-                    <span className="text-sm text-green-600 font-semibold">
-                        You save ₹{amountSaved}
-                    </span>
-                </div>
-
-                <div className="mb-4 space-y-2">
-                    {product.benefits.slice(0, 3).map((benefit, idx) => (
-                        <div key={idx} className="flex items-start gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
-                            <span className="text-sm text-gray-600">{benefit}</span>
-                        </div>
-                    ))}
+                <div className="mb-4 flex items-center justify-center gap-3">
+                    <span className="text-xl font-bold text-olive-green">₹{product.discountedPrice}</span>
+                    <span className="text-sm text-gray-400 line-through">₹{product.mrp}</span>
                 </div>
 
                 <Button
                     onClick={handleBuyNow}
-                    className="w-full bg-blue-950 hover:bg-amber-500 text-white py-6 rounded-full font-semibold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-white border border-gray-200 text-gray-800 hover:bg-olive-green hover:text-white hover:border-olive-green py-5 rounded-none font-medium text-xs uppercase tracking-widest shadow-sm hover:shadow-md transition-all duration-300"
                 >
-                    <ShoppingCart className="w-5 h-5" />
-                    Buy Now
+                    Add to Cart
                 </Button>
             </div>
         </motion.div>

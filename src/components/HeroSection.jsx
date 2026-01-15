@@ -1,139 +1,49 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
+import { ArrowRight } from 'lucide-react';
 import heroImage from '@/assets/images/General-1.jpg';
 
 const HeroSection = () => {
-    const { toast } = useToast();
-
     const handleShopNow = () => {
-        window.open('https://www.amazon.in/GLOW-VEDDA-Brightening-Anti-Dark-Combination/dp/B0G7XVYK34/ref=sr_1_1_sspa?crid=LV10EYE14U64&dib=eyJ2IjoiMSJ9.ByTHUgWj2od4fwt4U1cTpb21yzxrNFpHm0ufyaxeEa3F9jbRTwt4n1_2DW_fAxPcuRRO6Y4yAMnbMpUaWMuujm4OsPjHS5Z4c5nZCR41v2k8033byWLkOzFFAEuPbh67mC-zFxdn5UfGboJfflmYTT8lEEoV4ftm5Zf92cLyAiaXu3ATU0EFSNj1v2pOoA-AmSD5YDe1yS4EZdmCaS9evadZYUgmkIU0f6dutgg3oJ4.vxDXTMqIF2gmxMOg0TK8Bic5HBLfD1ijnlHQyTPtbE4&dib_tag=se&keywords=glow+vedda&qid=1766475956&sprefix=glow+vedda%2Caps%2C180&sr=8-1-spons&aref=Tytq0ROeEj&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1', '_blank');
+        window.open('https://www.amazon.in/GLOW-VEDDA-Brightening-Anti-Dark-Combination/dp/B0G7XVYK34/', '_blank');
     };
 
     return (
-        <section className="relative bg-gradient-to-br from-amber-50 via-white to-blue-50 overflow-hidden">
-            <div className="container mx-auto px-4 py-16 md:py-24">
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="space-y-6"
+        <section className="relative w-full h-[85vh] overflow-hidden font-poppins">
+            {/* Background Image */}
+            <div className="absolute inset-0">
+                <img
+                    src={heroImage}
+                    alt="GlowVedda Natural Skincare"
+                    className="w-full h-full object-cover object-center"
+                />
+                {/* Optional subtle overlay if image is too bright */}
+                <div className="absolute inset-0 bg-black/5"></div>
+            </div>
+
+            {/* Content Box - Bottom Left */}
+            <div className="absolute bottom-12 left-4 md:left-12 z-10 max-w-md w-full">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="bg-olive-green p-8 md:p-10 shadow-xl"
+                >
+                    <h1 className="text-3xl md:text-5xl font-oswald font-medium text-white mb-4 leading-tight">
+                        NATURAL <br /> RADIANCE
+                    </h1>
+                    <p className="text-off-white/90 text-sm md:text-base mb-8 font-light leading-relaxed">
+                        Celebrate your skin with our premium collection of natural skincare essentials. Pure, potent, and perfect for you.
+                    </p>
+
+                    <Button
+                        onClick={handleShopNow}
+                        className="bg-off-white text-olive-green hover:bg-white px-8 py-6 rounded-none text-sm tracking-widest uppercase font-medium transition-all duration-300 w-full md:w-auto"
                     >
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="inline-block"
-                        >
-                            <span className="text-amber-500 font-semibold text-sm tracking-wider uppercase">
-                                Natural Skincare
-                            </span>
-                        </motion.div>
-
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="text-4xl md:text-6xl font-bold text-gray-900 mb-6"
-                        >
-                            Glow with <span className="text-primary">Natural Radiance</span>
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto"
-                        >
-                            Celebrate the season of joy with our premium collection.
-                            <br />
-                            <span className="font-semibold text-secondary">Upto 30% OFF</span> on all products!
-                        </motion.p>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="flex flex-wrap gap-4"
-                        >
-                            <Button
-                                onClick={handleShopNow}
-                                className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                            >
-                                Shop Now
-                            </Button>
-                            <Button
-                                onClick={handleShopNow}
-                                variant="outline"
-                                className="border-2 border-blue-950 text-blue-950 hover:bg-blue-950 hover:text-white px-8 py-6 text-lg rounded-full transition-all duration-300"
-                            >
-                                Learn More
-                            </Button>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.6 }}
-                            className="flex items-center gap-8 pt-4"
-                        >
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-amber-500">100%</div>
-                                <div className="text-sm text-gray-600">Natural</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-amber-500">18%</div>
-                                <div className="text-sm text-gray-600">Off Today</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-amber-500">5+</div>
-                                <div className="text-sm text-gray-600">Products</div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="relative"
-                    >
-                        <div className="relative z-10">
-                            <img
-                                src={heroImage}
-                                alt="GlowVedda Natural Skincare Collection"
-                                className="w-full h-auto rounded-3xl shadow-2xl"
-                            />
-                        </div>
-                        <motion.div
-                            animate={{
-                                scale: [1, 1.1, 1],
-                                rotate: [0, 5, 0]
-                            }}
-                            transition={{
-                                duration: 4,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                            style={{ willChange: "transform" }}
-                            className="absolute -bottom-8 -left-8 w-64 h-64 bg-amber-400 rounded-full blur-3xl opacity-20 z-0 hidden md:block"
-                        />
-                        <motion.div
-                            animate={{
-                                scale: [1, 1.2, 1],
-                                rotate: [0, -5, 0]
-                            }}
-                            transition={{
-                                duration: 5,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                            style={{ willChange: "transform" }}
-                            className="absolute -top-8 -right-8 w-64 h-64 bg-blue-400 rounded-full blur-3xl opacity-20 z-0 hidden md:block"
-                        />
-                    </motion.div>
-                </div>
+                        Shop Now <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                </motion.div>
             </div>
         </section>
     );

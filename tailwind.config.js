@@ -23,12 +23,12 @@ module.exports = {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 primary: {
-                    DEFAULT: 'hsl(var(--primary))',
-                    foreground: 'hsl(var(--primary-foreground))',
+                    DEFAULT: 'rgb(111, 130, 12)', // Olive Green
+                    foreground: '#ffffff',
                 },
                 secondary: {
-                    DEFAULT: 'hsl(var(--secondary))',
-                    foreground: 'hsl(var(--secondary-foreground))',
+                    DEFAULT: '#f5f4f0', // Off-white
+                    foreground: 'rgb(111, 130, 12)',
                 },
                 destructive: {
                     DEFAULT: 'hsl(var(--destructive))',
@@ -39,8 +39,8 @@ module.exports = {
                     foreground: 'hsl(var(--muted-foreground))',
                 },
                 accent: {
-                    DEFAULT: 'hsl(var(--accent))',
-                    foreground: 'hsl(var(--accent-foreground))',
+                    DEFAULT: 'rgb(111, 130, 12)',
+                    foreground: '#ffffff',
                 },
                 popover: {
                     DEFAULT: 'hsl(var(--popover))',
@@ -50,6 +50,12 @@ module.exports = {
                     DEFAULT: 'hsl(var(--card))',
                     foreground: 'hsl(var(--card-foreground))',
                 },
+                'olive-green': 'rgb(111, 130, 12)',
+                'off-white': '#f5f4f0',
+            },
+            fontFamily: {
+                oswald: ['Oswald', 'sans-serif'],
+                poppins: ['Poppins', 'sans-serif'],
             },
             borderRadius: {
                 lg: 'var(--radius)',
