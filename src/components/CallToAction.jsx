@@ -5,6 +5,10 @@ import { ArrowRight, Gift } from 'lucide-react';
 
 const CallToAction = () => {
     const handleShopNow = () => {
+        if (window.fbq) {
+  window.fbq('track', 'Purchase');
+}
+
         window.open('https://www.amazon.in/GLOW-VEDDA-Brightening-Anti-Dark-Combination/dp/B0G7XVYK34/', '_blank');
     };
 
