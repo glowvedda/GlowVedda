@@ -11,6 +11,10 @@ const ProductCard = ({ product, index, imageElement }) => {
 
     const handleBuyNow = () => {
         if (product.link) {
+            if (window.fbq) {
+  window.fbq('track', 'Purchase');
+}
+
             window.open(product.link, '_blank');
         } else {
             toast({
