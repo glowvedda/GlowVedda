@@ -39,21 +39,40 @@ function App() {
                 <meta property="twitter:description" content="Discover GlowVedda's range of premium skincare products including Vitamin C Serum, Salicylic Acid Serum, Sunscreen, and Face Wash." />
                 <meta property="twitter:image" content="https://glowvedda.com/android-chrome-512x512.png" />
             </Helmet>
-            <div className="min-h-screen bg-white">
+
+            <div className="relative min-h-screen overflow-x-clip">
+                <div className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-clay/20 blur-3xl" aria-hidden="true"></div>
+                <div className="pointer-events-none absolute right-0 top-[22rem] h-96 w-96 rounded-full bg-moss/20 blur-3xl" aria-hidden="true"></div>
+
                 <Header onSearch={setSearchQuery} />
-                {searchQuery ? (
-                    <div className="pt-24 min-h-[60vh]">
-                        <h2 className="text-center text-3xl font-oswald mb-8">Search Results for "{searchQuery}"</h2>
-                        <ProductShowcase products={filteredProducts} />
-                    </div>
-                ) : (
-                    <>
-                        <HeroSection />
-                        <ProductShowcase products={products} />
-                        <BenefitsSection />
-                        <CallToAction />
-                    </>
-                )}
+
+                <main className="relative z-10 pb-16 pt-8 md:pt-12">
+                    {searchQuery ? (
+                        <section className="container mx-auto px-4 pt-28 md:pt-32">
+                            <div className="section-shell atmosphere-grid p-8 md:p-14">
+                                <div className="mx-auto max-w-3xl text-center">
+                                    <span className="pill-chip">Search Mode</span>
+                                    <h2 className="mt-5 text-3xl font-syne text-emerald-950 md:text-5xl">
+                                        Results for
+                                        <span className="text-gradient"> "{searchQuery}"</span>
+                                    </h2>
+                                    <p className="mt-4 text-sm text-emerald-900/75 md:text-base">
+                                        Discover the right formula for your routine and tap any product to shop instantly.
+                                    </p>
+                                </div>
+                            </div>
+                            <ProductShowcase products={filteredProducts} />
+                        </section>
+                    ) : (
+                        <>
+                            <HeroSection />
+                            <ProductShowcase products={products} />
+                            <BenefitsSection />
+                            <CallToAction />
+                        </>
+                    )}
+                </main>
+
                 <Footer />
                 <Toaster />
             </div>

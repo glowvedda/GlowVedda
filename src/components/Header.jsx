@@ -1,83 +1,166 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
+import { Search, User, ShoppingBag, Menu, X, Leaf } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
 const Header = ({ onSearch }) => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isElevated, setIsElevated] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsElevated(window.scrollY > 24);
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const navLinks = [
+        { label: 'Home', href: '/' },
+        { label: 'Collection', href: '#catalog' },
+        { label: 'Benefits', href: '#benefits' },
+        { label: 'Contact', href: '#contact' },
+    ];
+
+    const closeSearch = () => {
+        setIsSearchOpen(false);
+        onSearch('');
+    };
 
     return (
-        <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm font-poppins">
-            {/* Announcement Bar */}
-            <div className="bg-olive-green text-white text-center py-2 text-xs font-medium tracking-wide">
-                🎉 WINTER SALE IS LIVE! 🎉
+        <header className="sticky top-0 z-50 w-full font-manrope">
+            <div className="relative overflow-hidden border-b border-emerald-950/5 bg-gradient-to-r from-moss to-emerald-900 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.24em] text-white">
+                <span className="relative z-10">Free shipping over ₹499 • Summer glow event live now</span>
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_50%,rgba(255,255,255,0.18),transparent_36%)]"></div>
             </div>
 
-            <div className="container mx-auto px-4 py-4">
-                <div className="flex justify-between items-center relative">
-                    {/* Mobile Menu Button */}
-                    <button className="md:hidden text-gray-700">
-                        <Menu size={24} />
-                    </button>
+            <motion.div
+                animate={{
+                    borderColor: isElevated ? 'rgba(22, 63, 45, 0.14)' : 'rgba(22, 63, 45, 0.08)',
+                    backgroundColor: isElevated ? 'rgba(255, 252, 245, 0.86)' : 'rgba(255, 252, 245, 0.68)',
+                    boxShadow: isElevated ? '0 16px 40px rgba(17, 52, 37, 0.15)' : '0 8px 24px rgba(17, 52, 37, 0.08)',
+                }}
+                transition={{ duration: 0.3 }}
+                className="border-b backdrop-blur-xl"
+            >
+                <div className="container mx-auto px-4 py-4">
+                    <div className="relative flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3 lg:gap-10">
+                            <button
+                                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/15 text-emerald-900 md:hidden"
+                                onClick={() => setIsMenuOpen(prev => !prev)}
+                                aria-label="Toggle navigation"
+                            >
+                                {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
+                            </button>
 
-                    {/* Navigation Links (Left) */}
-                    <nav className={`hidden md:flex gap-8 items-center flex-1 ${isSearchOpen ? 'invisible' : ''}`}>
-                        <a href="/" className="text-sm font-medium text-gray-700 hover:text-olive-green transition-colors uppercase tracking-wider">Home</a>
-                        <a href="#catalog" className="text-sm font-medium text-gray-700 hover:text-olive-green transition-colors uppercase tracking-wider">Catalog</a>
-                        <a href="#" className="text-sm font-medium text-gray-700 hover:text-olive-green transition-colors uppercase tracking-wider">Contact</a>
-                    </nav>
+                            <nav className={`hidden items-center gap-7 md:flex ${isSearchOpen ? 'opacity-30' : ''}`}>
+                                {navLinks.map(link => (
+                                    <a
+                                        key={link.label}
+                                        href={link.href}
+                                        className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald-900/80 transition-colors hover:text-emerald-700"
+                                    >
+                                        {link.label}
+                                    </a>
+                                ))}
+                            </nav>
+                        </div>
 
-                    {/* Logo (Center) */}
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className={`text-center flex-1 ${isSearchOpen ? 'hidden md:block' : ''}`}
-                    >
-                        <h1 className="text-3xl font-oswald font-medium text-gray-900 tracking-tight cursor-pointer" onClick={() => window.location.reload()}>
-                            GlowVedda
-                        </h1>
-                    </motion.div>
+                        <button
+                            className="group flex flex-col items-center"
+                            onClick={() => window.location.reload()}
+                            aria-label="Reload homepage"
+                        >
+                            <div className="flex items-center gap-2 text-sm uppercase tracking-[0.26em] text-emerald-900/80">
+                                <Leaf className="h-3.5 w-3.5 text-clay transition-transform duration-300 group-hover:-rotate-6" />
+                                Clean Beauty
+                            </div>
+                            <h1 className="font-syne text-2xl font-semibold tracking-tight text-emerald-950 md:text-3xl">GlowVedda</h1>
+                        </button>
 
-                    {/* Icons (Right) */}
-                    <div className="flex gap-6 items-center flex-1 justify-end">
-                        <AnimatePresence>
-                            {isSearchOpen ? (
-                                <motion.div
-                                    initial={{ width: 0, opacity: 0 }}
-                                    animate={{ width: '100%', opacity: 1 }}
-                                    exit={{ width: 0, opacity: 0 }}
-                                    className="absolute inset-0 z-20 bg-white flex items-center gap-4 px-4 md:static md:w-auto md:bg-transparent"
-                                >
+                        <div className="flex items-center gap-2 md:gap-3">
+                            <button
+                                onClick={() => setIsSearchOpen(prev => !prev)}
+                                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/15 bg-white/70 text-emerald-900 transition-all hover:border-emerald-900/30 hover:bg-white"
+                                aria-label="Toggle search"
+                            >
+                                {isSearchOpen ? <X className="h-4 w-4" /> : <Search className="h-4 w-4" />}
+                            </button>
+                            <button
+                                className="hidden h-10 w-10 items-center justify-center rounded-full border border-emerald-900/15 bg-white/70 text-emerald-900 transition-all hover:border-emerald-900/30 hover:bg-white md:inline-flex"
+                                aria-label="Account"
+                            >
+                                <User className="h-4 w-4" />
+                            </button>
+                            <button
+                                className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-emerald-900/15 bg-white/70 text-emerald-900 transition-all hover:border-emerald-900/30 hover:bg-white"
+                                aria-label="Cart"
+                            >
+                                <ShoppingBag className="h-4 w-4" />
+                                <span className="absolute -right-0.5 -top-0.5 inline-flex h-5 min-w-[18px] items-center justify-center rounded-full bg-secondary px-1 text-[10px] font-bold text-white">
+                                    0
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <AnimatePresence>
+                        {isSearchOpen && (
+                            <motion.div
+                                initial={{ opacity: 0, y: -16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -12 }}
+                                transition={{ duration: 0.22 }}
+                                className="pt-4"
+                            >
+                                <div className="glass-sheen mx-auto flex max-w-2xl items-center gap-3 rounded-2xl border border-emerald-900/10 px-4 py-3">
+                                    <Search className="h-4 w-4 text-emerald-900/60" />
                                     <Input
                                         type="text"
-                                        placeholder="Search for products..."
-                                        className="w-full border-b border-gray-300 rounded-none px-0 focus-visible:ring-0 focus-visible:border-olive-green"
+                                        placeholder="Search by product name, concern, or benefit"
+                                        className="h-10 border-0 bg-transparent px-0 text-sm text-emerald-950 placeholder:text-emerald-900/50 focus-visible:ring-0"
                                         autoFocus
-                                        onChange={(e) => onSearch(e.target.value)}
+                                        onChange={e => onSearch(e.target.value)}
                                     />
-                                    <button onClick={() => { setIsSearchOpen(false); onSearch(''); }}>
-                                        <X className="w-5 h-5 text-gray-500 hover:text-red-500" />
+                                    <button
+                                        onClick={closeSearch}
+                                        className="rounded-full border border-emerald-900/15 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-900/70 transition-colors hover:text-emerald-900"
+                                    >
+                                        Clear
                                     </button>
-                                </motion.div>
-                            ) : (
-                                <button onClick={() => setIsSearchOpen(true)}>
-                                    <Search className="w-5 h-5 text-gray-700 cursor-pointer hover:text-olive-green transition-colors" />
-                                </button>
-                            )}
-                        </AnimatePresence>
-
-                        {!isSearchOpen && (
-                            <>
-                                <User className="w-5 h-5 text-gray-700 cursor-pointer hover:text-olive-green transition-colors hidden md:block" />
-                                <div className="relative cursor-pointer group">
-                                    <ShoppingBag className="w-5 h-5 text-gray-700 group-hover:text-olive-green transition-colors" />
-                                    <span className="absolute -top-2 -right-2 bg-olive-green text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">0</span>
                                 </div>
-                            </>
+                            </motion.div>
                         )}
-                    </div>
+                    </AnimatePresence>
+
+                    <AnimatePresence>
+                        {isMenuOpen && (
+                            <motion.nav
+                                initial={{ opacity: 0, y: -8 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -8 }}
+                                className="mt-4 grid gap-2 rounded-2xl border border-emerald-900/10 bg-white/85 p-3 text-sm md:hidden"
+                            >
+                                {navLinks.map(link => (
+                                    <a
+                                        key={link.label}
+                                        href={link.href}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className="rounded-xl px-3 py-2 font-semibold uppercase tracking-[0.16em] text-emerald-900/80 transition-colors hover:bg-emerald-950/5 hover:text-emerald-700"
+                                    >
+                                        {link.label}
+                                    </a>
+                                ))}
+                            </motion.nav>
+                        )}
+                    </AnimatePresence>
                 </div>
-            </div>
+            </motion.div>
         </header>
     );
 };

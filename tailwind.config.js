@@ -23,12 +23,12 @@ module.exports = {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 primary: {
-                    DEFAULT: 'rgb(111, 130, 12)', // Olive Green
-                    foreground: '#ffffff',
+                    DEFAULT: 'hsl(var(--primary))',
+                    foreground: 'hsl(var(--primary-foreground))',
                 },
                 secondary: {
-                    DEFAULT: '#f5f4f0', // Off-white
-                    foreground: 'rgb(111, 130, 12)',
+                    DEFAULT: 'hsl(var(--secondary))',
+                    foreground: 'hsl(var(--secondary-foreground))',
                 },
                 destructive: {
                     DEFAULT: 'hsl(var(--destructive))',
@@ -50,12 +50,16 @@ module.exports = {
                     DEFAULT: 'hsl(var(--card))',
                     foreground: 'hsl(var(--card-foreground))',
                 },
-                'olive-green': 'rgb(111, 130, 12)',
-                'off-white': '#f5f4f0',
+                'olive-green': '#1e5f44',
+                'off-white': '#fefcf5',
+                clay: '#d67c3f',
+                moss: '#2a7d58',
             },
             fontFamily: {
-                oswald: ['Oswald', 'sans-serif'],
-                poppins: ['Poppins', 'sans-serif'],
+                syne: ['Syne', 'sans-serif'],
+                manrope: ['Manrope', 'sans-serif'],
+                oswald: ['Syne', 'sans-serif'],
+                poppins: ['Manrope', 'sans-serif'],
             },
             borderRadius: {
                 lg: 'var(--radius)',
@@ -71,10 +75,20 @@ module.exports = {
                     from: { height: 'var(--radix-accordion-content-height)' },
                     to: { height: 0 },
                 },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0px)' },
+                    '50%': { transform: 'translateY(-8px)' },
+                },
+                shimmer: {
+                    '0%': { backgroundPosition: '-200% 0' },
+                    '100%': { backgroundPosition: '200% 0' },
+                },
             },
             animation: {
                 'accordion-down': 'accordion-down 0.2s ease-out',
                 'accordion-up': 'accordion-up 0.2s ease-out',
+                float: 'float 6s ease-in-out infinite',
+                shimmer: 'shimmer 3.8s linear infinite',
             },
         },
     },
